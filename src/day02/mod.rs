@@ -1,7 +1,7 @@
 mod report;
 
 use crate::day02::report::Report;
-use crate::utils::read_lines;
+use std::fs;
 
 pub(crate) fn run() {
     let filename = "data/day02/input.txt";
@@ -11,6 +11,14 @@ pub(crate) fn run() {
     println!("Result of Day 02, Part 1 is {}", result_part_1);
     let result_part_2 = calculate_valid_safe_reports(&reports);
     println!("Result of Day 02, Part 2 is {}", result_part_2);
+}
+
+fn parse_file_data(filename: &str) -> Vec<Report> {
+    fs::read_to_string(filename)
+        .expect("Error reading file")
+        .lines()
+        .map(Report::from_string)
+        .collect()
 }
 
 fn calculate_valid_reports(reports: &Vec<Report>) -> usize {
@@ -26,22 +34,6 @@ fn calculate_valid_safe_reports(reports: &Vec<Report>) -> usize {
         .count();
 
     safe_count
-}
-
-fn parse_file_data(filename: &str) -> Vec<Report> {
-    read_lines(filename)
-        .expect("File not found")
-        .filter_map(|line| {
-            line.ok()
-                .map(|content| {
-                    content
-                        .split_whitespace()
-                        .filter_map(|s| s.parse::<i32>().ok())
-                        .collect::<Vec<i32>>()
-                })
-                .map(Report::new)
-        })
-        .collect()
 }
 
 #[cfg(test)]

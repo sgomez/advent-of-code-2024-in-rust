@@ -1,4 +1,4 @@
-pub mod two_integers_parser;
+pub mod line_integer_parser;
 
 use std::fs::File;
 use std::io::{self, BufRead};
