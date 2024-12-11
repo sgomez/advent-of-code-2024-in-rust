@@ -7,6 +7,7 @@ mod day06;
 mod day07;
 mod day08;
 mod day09;
+mod day10;
 mod utils;
 
 use std::env;
@@ -17,7 +18,7 @@ fn main() {
     let day_to_run = if args.len() > 1 {
         args[1].parse::<u32>().unwrap_or(24)
     } else {
-        9
+        10
     };
 
     match day_to_run {
@@ -30,6 +31,7 @@ fn main() {
         7 => day07::run(),
         8 => day08::run(),
         9 => day09::run(),
+        10 => day10::run(),
         _ => eprintln!("Error: day {} not implemented.", day_to_run), // Manejo de errores
     }
 }
